@@ -1,0 +1,362 @@
+/* CookModal is styled to match the app's glassmorphism system in index.css */
+
+.cook-modal__overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000; /* above .glass-nav (1000) */
+  overscroll-behavior: contain;
+}
+
+.cook-modal__dialog {
+  width: 100%;
+  max-width: 920px;
+  max-height: min(90vh, 880px);
+  overflow: hidden;
+  border-radius: 18px;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.cook-modal__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.25rem 1rem;
+  background: rgba(11, 15, 25, 0.65);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.cook-modal__headerText {
+  min-width: 0;
+  flex: 1;
+}
+
+.cook-modal__title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+}
+
+.cook-modal__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.cook-modal__metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.cook-modal__metaIcon {
+  color: var(--primary-color);
+}
+.cook-modal__metaIcon--good {
+  color: #34d399;
+}
+
+.cook-modal__closeBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.cook-modal__closeBtn:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.cook-modal__body {
+  padding: 1.25rem;
+  overflow: auto;
+  max-height: calc(min(90vh, 880px) - 72px);
+}
+
+.cook-modal__progress {
+  margin-bottom: 1.25rem;
+}
+
+.cook-modal__progressRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.cook-modal__progressTrack {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.cook-modal__progressFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.25);
+  transition: width 0.35s ease;
+}
+
+.cook-modal__summary {
+  margin: 0 0 1.25rem 0;
+  padding: 1rem 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 3px solid var(--primary-color);
+}
+
+.cook-modal__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.cook-modal__chip {
+  font-size: 0.8rem;
+}
+.cook-modal__chip--dietary {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+}
+.cook-modal__chip--taste {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.2);
+  color: var(--primary-color);
+}
+
+.cook-modal__sectionTitle {
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.cook-modal__sectionIcon {
+  color: var(--primary-color);
+}
+
+.cook-modal__sectionCount {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.cook-modal__ingredientsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.cook-modal__ingredient {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  min-width: 0;
+}
+
+.cook-modal__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--primary-color);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+  flex-shrink: 0;
+}
+
+.cook-modal__ingredientText {
+  color: var(--text-primary);
+  text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+.cook-modal__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 0;
+  color: var(--text-secondary);
+}
+
+.cook-modal__spinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 2px solid rgba(16, 185, 129, 0.35);
+  border-top-color: transparent;
+  animation: cookModalSpin 1s linear infinite;
+}
+
+@keyframes cookModalSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cook-modal__empty {
+  padding: 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.cook-modal__youtubeLink {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  text-decoration: none;
+}
+.cook-modal__youtubeLink:hover {
+  text-decoration: underline;
+}
+
+.cook-modal__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cook-modal__step {
+  display: flex;
+  gap: 0.9rem;
+  padding: 1rem;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cook-modal__step:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.cook-modal__step--done {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.cook-modal__stepIcon {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.cook-modal__checkIcon {
+  color: #34d399;
+}
+
+.cook-modal__circleIcon {
+  color: var(--text-secondary);
+}
+
+.cook-modal__stepContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.cook-modal__stepLabel {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+.cook-modal__stepText {
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.cook-modal__stepText--done {
+  color: var(--text-secondary);
+  text-decoration: line-through;
+}
+
+.cook-modal__done {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border-radius: 14px;
+  text-align: center;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.cook-modal__doneText {
+  margin: 0;
+  font-weight: 800;
+  color: #34d399;
+}
+
+@media (max-width: 720px) {
+  .cook-modal__dialog {
+    max-height: 92vh;
+  }
+  .cook-modal__ingredientsGrid {
+    grid-template-columns: 1fr;
+  }
+  .cook-modal__body {
+    padding: 1rem;
+  }
+}
+
