@@ -5,3 +5,5 @@ pandas
 nltk
 sentence-transformers
 python-dotenv
+faiss-cpu
+requests
