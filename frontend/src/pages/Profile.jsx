@@ -24,7 +24,7 @@ const Profile = () => {
 
     const fetchProfile = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/user/${user.id}/profile`);
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/${user.id}/profile`);
         if (!res.ok) throw new Error('Failed to load profile data');
         const data = await res.json();
         setProfileData({
@@ -34,7 +34,7 @@ const Profile = () => {
 
         // Fetch actual recipe documents if favorites exist
         if (data.favorites && data.favorites.length > 0) {
-            const recipesRes = await fetch("http://localhost:8000/recipes/batch", {
+            const recipesRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/recipes/batch`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ recipe_ids: data.favorites })
@@ -63,7 +63,7 @@ const Profile = () => {
     if (!user?.id) return;
 
     try {
-      await fetch(`http://localhost:8000/user/${user.id}/interact`, {
+      await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/${user.id}/interact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -242,7 +242,7 @@ const Profile = () => {
                   const nameStr = recipe.name || recipe.title || "Delicious Meal";
                   const safeImageUrl = recipe.image && recipe.image.includes('http') && !recipe.image.includes('loremflickr') 
                     ? recipe.image 
-                    : `http://localhost:8000/api/image?q=${encodeURIComponent(nameStr)}`;
+                    : `${import.meta.env.VITE_API_BASE_URL}/api/image?q=${encodeURIComponent(nameStr)}`;
                   
                   const matchPercent = recipe.match_percentage !== undefined 
                     ? Math.round(recipe.match_percentage * 100) 

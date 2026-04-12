@@ -78,7 +78,7 @@ const ProcessingView = () => {
             min_match_percentage: 0.1
         };
 
-        const res = await fetch('http://localhost:8000/recommend_recipes', {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/recommend_recipes`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)

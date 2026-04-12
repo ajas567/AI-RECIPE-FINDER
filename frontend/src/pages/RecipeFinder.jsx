@@ -39,7 +39,7 @@ const RecipeFinder = () => {
     setMatchingLoading(true);
 
     try {
-      const res = await fetch('http://localhost:8000/match_ingredients', {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/match_ingredients`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ raw_ingredients: itemsToProcess })

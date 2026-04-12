@@ -13,7 +13,7 @@ const CookModal = ({ recipe, onClose }) => {
   useEffect(() => {
     if (!recipe) return;
     setLoading(true);
-    fetch(`http://localhost:8000/api/recipe-detail?name=${encodeURIComponent(name)}`)
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/api/recipe-detail?name=${encodeURIComponent(name)}`)
       .then(r => r.json())
       .then(data => {
         setLiveSteps(data.steps || []);

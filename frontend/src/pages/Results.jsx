@@ -65,7 +65,7 @@ const Results = () => {
 
   useEffect(() => {
     if (user?.id) {
-      fetch(`http://localhost:8000/user/${user.id}/profile`)
+      fetch(`${import.meta.env.VITE_API_BASE_URL}/user/${user.id}/profile`)
         .then(res => res.json())
         .then(data => {
           if (data && data.favorites) {
@@ -88,7 +88,7 @@ const Results = () => {
     if (!user?.id) return;
 
     try {
-      await fetch(`http://localhost:8000/user/${user.id}/interact`, {
+      await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/${user.id}/interact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -172,7 +172,7 @@ const Results = () => {
           const nameStr = recipe.name || recipe.title || "Delicious Meal";
           const safeImageUrl = recipe.image && recipe.image.includes('http') && !recipe.image.includes('loremflickr') 
             ? recipe.image 
-            : `http://localhost:8000/api/image?q=${encodeURIComponent(nameStr)}`;
+            : `${import.meta.env.VITE_API_BASE_URL}/api/image?q=${encodeURIComponent(nameStr)}`;
           
           const matchPercent = recipe.match_percentage !== undefined 
             ? Math.round(recipe.match_percentage * 100) 

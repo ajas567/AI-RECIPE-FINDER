@@ -23,8 +23,8 @@ const Explore = () => {
       try {
         // Fetch categorized recipes
         const [catRes, topRes] = await Promise.all([
-          fetch('http://localhost:8000/explore'),
-          fetch('http://localhost:8000/explore/top')
+          fetch(`${import.meta.env.VITE_API_BASE_URL}/explore`),
+          fetch(`${import.meta.env.VITE_API_BASE_URL}/explore/top`)
         ]);
 
         if (catRes.ok) {
@@ -64,7 +64,7 @@ const Explore = () => {
     debounceTimer.current = setTimeout(async () => {
       try {
         const res = await fetch(
-          `http://localhost:8000/search/recipes?q=${encodeURIComponent(val.trim())}&limit=20`
+          `${import.meta.env.VITE_API_BASE_URL}/search/recipes?q=${encodeURIComponent(val.trim())}&limit=20`
         );
         if (res.ok) {
           const data = await res.json();
@@ -237,7 +237,7 @@ const RecipeCard = ({ recipe, delay, onCook }) => {
   const nameStr = recipe.name || recipe.title || "Delicious Meal";
   const safeImageUrl = recipe.image && recipe.image.includes('http') && !recipe.image.includes('loremflickr') 
     ? recipe.image 
-    : `http://localhost:8000/api/image?q=${encodeURIComponent(nameStr)}`;
+    : `${import.meta.env.VITE_API_BASE_URL}/api/image?q=${encodeURIComponent(nameStr)}`;
   
   const totalTime = recipe.time || ((recipe.est_prep_time_min || 0) + (recipe.est_cook_time_min || 0)) || "30";
   const diffStr = recipe.difficulty || (recipe.num_ingredients ? `${recipe.num_ingredients} items` : 'Medium');
@@ -258,7 +258,7 @@ const RecipeCard = ({ recipe, delay, onCook }) => {
             setSaved(next);
             if (!user?.id || !recipe?.id) return;
             try {
-              await fetch(`http://localhost:8000/user/${user.id}/interact`, {
+              await fetch(`${import.meta.env.VITE_API_BASE_URL}/user/${user.id}/interact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
