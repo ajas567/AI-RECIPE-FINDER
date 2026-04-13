@@ -38,21 +38,9 @@ from database import get_client, DB_NAME
 
 app = FastAPI(title="INGREDIENT BASED AI RECIPE FINDER API")
 
-import os
-
-ALLOWED_ORIGINS = [
-    "http://localhost:5173",        # Local Vite dev server
-    "http://localhost:4173",        # Local Vite preview
-]
-
-# Add the Vercel production URL from environment variable (if set)
-VERCEL_URL = os.getenv("FRONTEND_URL")
-if VERCEL_URL:
-    ALLOWED_ORIGINS.append(VERCEL_URL)
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=["*"],            # Allow all origins (Vercel, localhost, etc.)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
