@@ -18,6 +18,8 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           git lfs install
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           # Create a fresh orphan branch with NO history (strips old zip from memory)
           git checkout --orphan deploy
           git add -A
