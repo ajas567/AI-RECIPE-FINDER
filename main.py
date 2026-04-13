@@ -355,9 +355,17 @@ def api_fetch_real_image(q: str):
             timeout=5
         )
         data = resp.json()
-        results = data.get("results", [])
-        if results and results[0].get("image"):
-            real_image_url = results[0]["image"]
+        
+        if resp.status_code == 402:
+            print(f"⚠️ SPOONACULAR QUOTA EXCEEDED: {data.get('message', 'Daily limit reached.')}")
+        elif resp.status_code != 200:
+            print(f"⚠️ SPOONACULAR API ERROR [{resp.status_code}]: {data.get('message', 'Unknown error.')}")
+        else:
+            results = data.get("results", [])
+            if results and results[0].get("image"):
+                real_image_url = results[0]["image"]
+            else:
+                print(f"ℹ️ SPOONACULAR: No recipe found for '{q}'")
     except Exception as e:
         print(f"Spoonacular lookup failed for '{q}': {e}")
 
