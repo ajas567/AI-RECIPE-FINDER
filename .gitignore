@@ -1,7 +1,3 @@
-# Ignore giant raw database ZIP files
-recipes_extended.zip
-*.zip
-
 # Ignore giant raw database files
 db/
 
